@@ -17,7 +17,6 @@ Para facilitar o uso de bibliotecas externas e a construção, o projeto utiliza
 
 Pré-requisitos
 -------
-* JDK -  Kit de desenvolvimento Java;
+* JDK - última versão do Kit de desenvolvimento Java;
 * Maven;
-* IDE de sua preferencia, recomendamos Eclipse ou NetBeans;
-
+* IDE de sua preferencia (recomendamos Eclipse ou NetBeans);
