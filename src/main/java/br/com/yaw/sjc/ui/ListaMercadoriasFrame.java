@@ -21,8 +21,9 @@ import br.com.yaw.sjc.exception.PersistenceException;
 import br.com.yaw.sjc.model.Mercadoria;
 
 /**
- * Tela principal da aplicacao. Apresenta uma lista com as mercadorias cadastradas. 
- * A partir dessa tela eh possivel criar/editar ou pesquisar mercadoria.
+ * Tela principal da aplicação. Apresenta uma lista com as mercadorias cadastradas. 
+ * 
+ * <p>A partir dessa tela eh possivel criar/editar ou pesquisar mercadoria.</p>
  * 
  * @author YaW Tecnologia
  */
@@ -99,8 +100,8 @@ public class ListaMercadoriasFrame extends JFrame {
 			new MercadoriaDAOJDBC().init();
 			SwingUtilities.invokeLater(newAtualizaMercadoriasAction());
 		} catch (PersistenceException ex) {
-			JOptionPane.showMessageDialog(null, "Nao foi possivel utilizar o Banco de dados: "+
-					ex.getMessage()+"\nVerifique a dependencia do driver ou configuracoes do banco!", "Erro", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Não foi possível inicializar o Banco de dados: "+
+					ex.getMessage()+"\nVerifique a dependência do driver ou configurações do banco!", "Erro", JOptionPane.ERROR_MESSAGE);
 			System.exit(0);
 		}
 	}
@@ -111,10 +112,11 @@ public class ListaMercadoriasFrame extends JFrame {
 			public void run() {
 				try {
 					MercadoriaDAO dao = new MercadoriaDAOJDBC();
-					tabela.reload(dao.getAllMercadorias());
+					tabela.reload(dao.getAll());
 				} catch (PersistenceException ex) {
-					JOptionPane.showMessageDialog(null, "Erro ao recarregar tabela: "+ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-				}				
+					JOptionPane.showMessageDialog(ListaMercadoriasFrame.this,
+							ex.getMessage(), "Erro ao consultar Mercadoria(s)", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		};
 	}
@@ -128,26 +130,18 @@ public class ListaMercadoriasFrame extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			Mercadoria m = tabela.getMercadoriaSelected();
 			if (m != null) {
-				new Thread(newExcluirMercadoriaAction(m)).start();
-			}
-		}
-	}
-	
-	private Runnable newExcluirMercadoriaAction(final Mercadoria m) {
-		return new Runnable() {
-			@Override
-			public void run() {
 				try {
 					MercadoriaDAO dao = new MercadoriaDAOJDBC();
 					dao.remove(m);
+					
 					SwingUtilities.invokeLater(newAtualizaMercadoriasAction());
 					
 				} catch (Exception ex) {
-					ex.printStackTrace();
-					JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro ao excluir", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(ListaMercadoriasFrame.this,
+							ex.getMessage(), "Erro ao excluir Mercadoria", JOptionPane.ERROR_MESSAGE);
 				}
 			}
-		};
+		}
 	}
 	
 	private class AtualizarListaListener implements ActionListener {

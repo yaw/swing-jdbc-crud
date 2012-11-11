@@ -7,11 +7,11 @@ import javax.swing.table.AbstractTableModel;
 import br.com.yaw.sjc.model.Mercadoria;
 
 /**
- * Define um TableModel para entidade Mercadoria, considerando as colunas:
+ * Define um TableModel para entidade <code>Mercadoria</code>, considerando as colunas:
  * <ul>
  *   <li>Nome;</li>
- *   <li>Descricao;</li>
- *   <li>Preco;</li>
+ *   <li>Descrição;</li>
+ *   <li>Preço;</li>
  *   <li>Quantidade;</li>
  * </ul> 
  * 

@@ -7,7 +7,7 @@ import javax.swing.JTable;
 import br.com.yaw.sjc.model.Mercadoria;
 
 /**
- * JTable com operacoes customizadas para entidade Mercadoria.
+ * <code>JTable</code> com operações customizadas para entidade <code>Mercadoria</code>.
  * 
  * @see br.com.yaw.sjc.ui.MercadoriaTableModel
  * 

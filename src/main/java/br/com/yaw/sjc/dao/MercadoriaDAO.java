@@ -5,7 +5,9 @@ import java.util.List;
 import br.com.yaw.sjc.model.Mercadoria;
 
 /**
- * Contrato de persistencia de entidade Mercadoria. Define as operações basicas de cadastro (CRUD).
+ * Contrato de persistência para a entidade <code>Mercadoria</code>. 
+ * 
+ * <p>Define as operações basicas de cadastro (CRUD), seguindo o design pattern <code>Data Access Object</code>.</p>
  * 
  * @author YaW Tecnologia
  */
@@ -26,7 +28,7 @@ public interface MercadoriaDAO {
 	/**
 	 * @return Lista com todas as mercadorias cadastradas no banco de dados.
 	 */
-	List<Mercadoria> getAllMercadorias();
+	List<Mercadoria> getAll();
 	
 	/**
 	 * @param nome Filtro da pesquisa utilizando like.

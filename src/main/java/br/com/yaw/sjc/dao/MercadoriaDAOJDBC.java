@@ -15,12 +15,17 @@ import br.com.yaw.sjc.exception.PersistenceException;
 import br.com.yaw.sjc.model.Mercadoria;
 
 /**
- * Implementa o componente de persistencia da Mercadoria, utilizando codigo JDBC.
+ * Implementa o contrato de persistência <code>MercadoriaDAO</code>, para resolver o cadastro da entidade <code>Mercadoria</code>. 
+ * 
+ * <p>A integração com o banco de dados e o envio dos comandos SQL ocorre através da API <code>JDBC</code>.</p>
+ * 
+ * @see br.com.yaw.sjpac.dao.MercadoriaDAO
  * 
  * @author YaW Tecnologia
  */
 public class MercadoriaDAOJDBC implements MercadoriaDAO {
 
+	//comandos SQL utilizados pelo DAO.
 	private final static String CREATE_TABLE = "CREATE TABLE  IF NOT EXISTS mercadoria (id INTEGER IDENTITY PRIMARY KEY NOT NULL, nome VARCHAR(20) NOT NULL, descricao varchar(80) NOT NULL, preco REAL NOT NULL, quantidade INTEGER NOT NULL)";
 	private final static String INSERT_MERCADORIA = "INSERT INTO mercadoria (nome,descricao,preco,quantidade) VALUES (?,?,?,?)";
 	private final static String UPDATE_MERCADORIA = "UPDATE mercadoria SET nome = ?, descricao = ?, preco = ?, quantidade = ? WHERE id = ?";
@@ -43,8 +48,8 @@ public class MercadoriaDAOJDBC implements MercadoriaDAO {
 				log.info("Criou a tabela 'mercadoria'");
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new PersistenceException("Nao foi possivivel inicializar o banco de dados: " + CREATE_TABLE, e);
+			log.error(e);
+			throw new PersistenceException("Não foi possivel inicializar o banco de dados: " + CREATE_TABLE, e);
 		} finally {
 			ConnectionManager.closeAll(conn, stmt);
 		}
@@ -52,7 +57,7 @@ public class MercadoriaDAOJDBC implements MercadoriaDAO {
 	
 	public void save(Mercadoria mercadoria) throws PersistenceException {
 		if (mercadoria == null) {
-			throw new PersistenceException("Informe a mercadoria para salvar!");
+			throw new PersistenceException("Informe a Mercadoria para salvar!");
 		}
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -64,8 +69,10 @@ public class MercadoriaDAOJDBC implements MercadoriaDAO {
 				stmt = getStatementUpdate(conn, mercadoria);
 			}
 			stmt.executeUpdate();
+			conn.commit();
 		} catch (SQLException e) {
-			String errorMsg = "Erro ao salvar mercadoria!";
+			try { conn.rollback(); } catch (Exception sx) {}
+			String errorMsg = "Erro ao salvar Mercadoria!";
 			log.error(errorMsg, e);
 			throw new PersistenceException(errorMsg, e);
 		} finally {
@@ -75,7 +82,6 @@ public class MercadoriaDAOJDBC implements MercadoriaDAO {
 	
 	private PreparedStatement getStatementInsert(Connection conn, Mercadoria m) throws SQLException {
 		PreparedStatement stmt = createStatementWithLog(conn, INSERT_MERCADORIA);
-		
 		stmt.setString(1, m.getNome());
 		stmt.setString(2, m.getDescricao());
 		stmt.setDouble(3, m.getPreco());
@@ -104,8 +110,10 @@ public class MercadoriaDAOJDBC implements MercadoriaDAO {
 			stmt = createStatementWithLog(conn, DELETE_MERCADORIA);
 			stmt.setInt(1, m.getId());
 			stmt.executeUpdate();
+			conn.commit();
 		} catch (SQLException e) {
-			String errorMsg = "Erro ao excluir mercadoria!";
+			try { conn.rollback(); } catch (Exception sx) {}
+			String errorMsg = "Erro ao excluir Mercadoria!";
 			log.error(errorMsg, e);
 			throw new PersistenceException(errorMsg, e);
 		}finally{
@@ -116,7 +124,7 @@ public class MercadoriaDAOJDBC implements MercadoriaDAO {
 	@Override
 	public Mercadoria findById(Integer id) throws PersistenceException {
 		if (id == null || id.intValue() <= 0) {
-			throw new PersistenceException("Informe o id valido para fazer a busca!");
+			throw new PersistenceException("Informe o id válido para fazer a busca!");
 		}
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -148,7 +156,7 @@ public class MercadoriaDAOJDBC implements MercadoriaDAO {
 		}
 	}
 	
-	public List<Mercadoria> getAllMercadorias() throws PersistenceException {
+	public List<Mercadoria> getAll() throws PersistenceException {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -176,7 +184,6 @@ public class MercadoriaDAOJDBC implements MercadoriaDAO {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		
 		
 		try {
 			conn = ConnectionManager.getConnection();

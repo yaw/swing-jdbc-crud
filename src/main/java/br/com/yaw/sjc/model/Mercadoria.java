@@ -5,8 +5,9 @@ import java.text.ParseException;
 import java.util.Locale;
 
 /**
- * Classe de modelo que representa uma mercadoria. A mercadoria eh um objeto persistido no banco de dados, por isso utilizamos o nome entidade.
- * As funcionalidades desse sistema demonstracao sao concentradas no cadastro (CRUD) de mercadorias.  
+ * Classe de modelo que representa uma mercadoria. A mercadoria é um objeto persistido no banco de dados, por isso utilizamos a classificamos como <strong>Entidade</strong>.
+ * 
+ * <p>As funcionalidades desse sistema demonstração são concentradas no cadastro (CRUD) de mercadorias.</p>
  * 
  * @author YaW Tecnologia
  */

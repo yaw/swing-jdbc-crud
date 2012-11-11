@@ -1,8 +1,9 @@
 package br.com.yaw.sjc.exception;
 
 /**
- * Exceção para problemas com o componente de persistencia.
- * Trata-se de uma RuntimeException!
+ * Componente de exceção para operações de persistência.
+ * 
+ * <p>A estratégia é utilizar uma <code>RuntimeException</code> para encapsular <code>SQLException</code>.</p>
  * 
  * @author YaW Tecnologia
  */

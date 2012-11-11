@@ -21,7 +21,7 @@ import br.com.yaw.sjc.dao.MercadoriaDAOJDBC;
 import br.com.yaw.sjc.model.Mercadoria;
 
 /**
- * Tela para incluir o registro da mercadoria.
+ * Tela para incluir o registro da <code>Mercadoria</code>.
  * 
  * @author YaW Tecnologia
  */
@@ -60,7 +60,7 @@ public class IncluirMercadoriaFrame extends JFrame {
 		JPanel panel = new JPanel();
 
 		bSalvar = new JButton("Salvar");
-		bSalvar.setMnemonic(KeyEvent.VK_M);
+		bSalvar.setMnemonic(KeyEvent.VK_S);
 		bSalvar.addActionListener(new SalvarMercadoriaListener());
 		panel.add(bSalvar);
 
@@ -86,9 +86,9 @@ public class IncluirMercadoriaFrame extends JFrame {
 
 		painelEditarMercadoria.add(new JLabel("Nome:"));
 		painelEditarMercadoria.add(tfNome);
-		painelEditarMercadoria.add(new JLabel("Descricao:"));
+		painelEditarMercadoria.add(new JLabel("Descrição:"));
 		painelEditarMercadoria.add(tfDescricao);
-		painelEditarMercadoria.add(new JLabel("Preco:"));
+		painelEditarMercadoria.add(new JLabel("Preço:"));
 		painelEditarMercadoria.add(tfPreco);
 		painelEditarMercadoria.add(new JLabel("Quantidade:"));
 		painelEditarMercadoria.add(tfQuantidade);
@@ -99,7 +99,7 @@ public class IncluirMercadoriaFrame extends JFrame {
 	}
 	
 	private void resetForm() {
-		tfId.setValue(new Integer(0));
+		tfId.setValue(null);
 		tfNome.setText("");
 		tfDescricao.setText("");
 		tfPreco.setText("");
@@ -121,7 +121,7 @@ public class IncluirMercadoriaFrame extends JFrame {
 	private String validador() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(tfNome.getText() == null || "".equals(tfNome.getText().trim()) ? "Nome, " : "");
-		sb.append(tfPreco.getText() == null || "".equals(tfPreco.getText().trim()) ? "Preco, " : "");
+		sb.append(tfPreco.getText() == null || "".equals(tfPreco.getText().trim()) ? "Preço, " : "");
 		sb.append(tfQuantidade.getText() == null || "".equals(tfQuantidade.getText().trim()) ? "Quantidade, " : "");
 		
 		if (!sb.toString().isEmpty()) {
@@ -143,14 +143,14 @@ public class IncluirMercadoriaFrame extends JFrame {
 		try {
 			quantidade = Integer.valueOf(tfQuantidade.getText());
 		} catch (NumberFormatException nex) {
-			throw new RuntimeException("Campo quantidade com conteudo invalido!");
+			throw new RuntimeException("Campo quantidade com conteúdo inválido!");
 		}
 		
 		Double preco = null;
 		try {
 			preco = Mercadoria.formatStringToPreco(tfPreco.getText());
 		} catch (ParseException nex) {
-			throw new RuntimeException("Campo preco com conteudo invalido!");
+			throw new RuntimeException("Campo preço com conteúdo inválido!");
 		}
 		
 		return new Mercadoria(null, nome, descricao, quantidade, preco);
@@ -172,30 +172,19 @@ public class IncluirMercadoriaFrame extends JFrame {
 	
 	private class SalvarMercadoriaListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			new Thread(newSalvarMercadoriaAction()).start();
-		}
-	}
-	
-	private Runnable newSalvarMercadoriaAction() {
-		return new Runnable() {
-			@Override
-			public void run() {
-				try {
-					Mercadoria m = loadMercadoriaFromPanel();
-					MercadoriaDAO dao = new MercadoriaDAOJDBC();
-					dao.save(m);
-					
-					setVisible(false);
-					resetForm();
-					
-					SwingUtilities.invokeLater(framePrincipal.newAtualizaMercadoriasAction());
-					
-				} catch (Exception ex) {
-					ex.printStackTrace();
-					JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro ao salvar", JOptionPane.ERROR_MESSAGE);
-				}
+			try {
+				Mercadoria m = loadMercadoriaFromPanel();
+				MercadoriaDAO dao = new MercadoriaDAOJDBC();
+				dao.save(m);
+				
+				setVisible(false);
+				resetForm();
+				SwingUtilities.invokeLater(framePrincipal.newAtualizaMercadoriasAction());
+				
+			} catch(Exception ex) {
+				JOptionPane.showMessageDialog(IncluirMercadoriaFrame.this, ex.getMessage(), "Erro ao incluir Mercadoria", JOptionPane.ERROR_MESSAGE);
 			}
-		};
+		}
 	}
 
 }

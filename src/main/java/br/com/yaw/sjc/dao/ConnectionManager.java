@@ -11,13 +11,13 @@ import org.apache.log4j.Logger;
 import br.com.yaw.sjc.exception.PersistenceException;
 
 /**
- * Componente responsavel por abrir e fechar conexao com o db.
+ * Componente responsável por abrir e encerrar a conexão com o banco de dados.
+ * 
  * @author YaW Tecnologia
- *
  */
 public class ConnectionManager {
 
-	//Informacoes para conexao com banco de dados HSQLDB.
+	//Informacões para conexão com banco de dados HSQLDB.
 	private static final String STR_DRIVER = "org.hsqldb.jdbcDriver";
 	private static final String DATABASE = "mercadoria";
 	private static final String STR_CON = "jdbc:hsqldb:file:" + DATABASE;
@@ -32,15 +32,16 @@ public class ConnectionManager {
 		try {
 			Class.forName(STR_DRIVER);
 			conn = DriverManager.getConnection(STR_CON, USER, PASSWORD);
+			conn.setAutoCommit(false);
 			
-			log.debug("Aberta a conexao com banco de dados!");
+			log.debug("Aberta a conexão com banco de dados!");
 			return conn;
 		} catch (ClassNotFoundException e) {
-			String errorMsg = "Driver nao encontrado";
+			String errorMsg = "Driver (JDBC) não encontrado";
 			log.error(errorMsg, e);
 			throw new PersistenceException(errorMsg, e);
 		} catch (SQLException e) {
-			String errorMsg = "Erro ao obter a conexao";
+			String errorMsg = "Erro ao obter a conexão";
 			log.error(errorMsg, e);
 			throw new PersistenceException(errorMsg, e);
 		}
@@ -50,10 +51,10 @@ public class ConnectionManager {
 		try {
 			if (conn != null) {
 				conn.close();
-				log.debug("Fechada a conexao com banco de dados!");
+				log.debug("Fechada a conexão com banco de dados!");
 			}
 		} catch (Exception e) {
-			log.error("Nao foi possivel fechar a conexao com o banco de dados!",e);
+			log.error("Não foi possivel fechar a conexão com o banco de dados!",e);
 		}
 	}
 
@@ -66,7 +67,7 @@ public class ConnectionManager {
 				stmt.close();
 			}
 		} catch (Exception e) {
-			log.error("Nao foi possivel fechar o statement!",e);
+			log.error("Não foi possivel fechar o statement!",e);
 		}
 	}
 
@@ -79,7 +80,7 @@ public class ConnectionManager {
 				rs.close();
 			}
 		} catch (Exception e) {
-			log.error("Nao foi possivel fechar o resultSet!",e);
+			log.error("Não foi possivel fechar o resultSet!",e);
 		}
 	}
 
