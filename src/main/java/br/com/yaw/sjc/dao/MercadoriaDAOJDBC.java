@@ -70,6 +70,7 @@ public class MercadoriaDAOJDBC implements MercadoriaDAO {
 			}
 			stmt.executeUpdate();
 			conn.commit();
+			log.debug("Mercadoria foi salva");
 		} catch (SQLException e) {
 			try { conn.rollback(); } catch (Exception sx) {}
 			String errorMsg = "Erro ao salvar Mercadoria!";
@@ -111,6 +112,7 @@ public class MercadoriaDAOJDBC implements MercadoriaDAO {
 			stmt.setInt(1, m.getId());
 			stmt.executeUpdate();
 			conn.commit();
+			log.debug("Mercadoria foi excluida");
 		} catch (SQLException e) {
 			try { conn.rollback(); } catch (Exception sx) {}
 			String errorMsg = "Erro ao excluir Mercadoria!";
@@ -145,7 +147,6 @@ public class MercadoriaDAOJDBC implements MercadoriaDAO {
 				
 				m = new Mercadoria(id, nome, descricao, qtde, preco);
 			}
-			
 			return m;
 		} catch (SQLException e) {
 			String errorMsg = "Erro ao consultar mercadoria por id!";
