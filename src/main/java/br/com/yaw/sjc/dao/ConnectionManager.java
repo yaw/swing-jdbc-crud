@@ -20,7 +20,8 @@ public class ConnectionManager {
 	//Informacões para conexão com banco de dados HSQLDB.
 	private static final String STR_DRIVER = "org.hsqldb.jdbcDriver";
 	private static final String DATABASE = "mercadoria";
-	private static final String STR_CON = "jdbc:hsqldb:file:" + DATABASE;
+	//private static final String STR_CON = "jdbc:hsqldb:file:" + DATABASE;
+	private static final String STR_CON = "jdbc:hsqldb:res:" + DATABASE;
 	private static final String USER = "sa";
 	private static final String PASSWORD = "";
 	
