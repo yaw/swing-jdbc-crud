@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0+" codebase="http://s3-sa-east-1.amazonaws.com/yaw-site-sp/app/">
+
+	<information>
+		<title>Aplicação Demo das tecnologias Swing e JDBC</title>
+		<vendor>YaW Tecnologia</vendor>
+		<description>Demo Swing e JDBC</description>
+		<description kind="short">SJC</description>
+	</information>
+	
+	<security>
+	</security>
+	
+	<resources>
+		<j2se version="1.6.0+" initial-heap-size="32m" max-heap-size="128m"/>
+		
+		<jar href="lib/hsqldb-2.2.8.jar" download="eager" />
+		<jar href="lib/log4j-1.2.16.jar" download="eager" />
+		<jar href="lib/swing-jdbc-crud.jar" download="eager" />
+	</resources>
+	<application-desc main-class="br.com.yaw.sjc.app.Main" />
+</jnlp>
