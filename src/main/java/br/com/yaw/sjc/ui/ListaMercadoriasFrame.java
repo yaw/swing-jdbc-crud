@@ -10,6 +10,9 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -35,10 +38,12 @@ public class ListaMercadoriasFrame extends JFrame {
 	private JButton bExcluirMercadoria;
 	private JButton bBuscarMercadoria;
 	private JButton bAtualizaLista;
+	private JMenuBar menubar;
 	
 	private IncluirMercadoriaFrame incluirFrame;
 	private EditarMercadoriaFrame editarFrame;
 	private BuscaMercadoriaFrame buscaFrame;
+	private SobreFrame sobreFrame;
 	
 	public ListaMercadoriasFrame() {
 		setTitle("Lista de Mercadoria");
@@ -78,9 +83,19 @@ public class ListaMercadoriasFrame extends JFrame {
 		bAtualizaLista.setMnemonic(KeyEvent.VK_A);
 		bAtualizaLista.addActionListener(new AtualizarListaListener());
 		
+		menubar = new JMenuBar();
+		JMenu mAjuda = new JMenu("Ajuda");
+		mAjuda.setMnemonic(KeyEvent.VK_J);
+        JMenuItem miSobre = new JMenuItem("Sobre");
+        miSobre.addActionListener(new SobreMenuListener());
+        mAjuda.add(miSobre);
+        menubar.add(mAjuda);
+        setJMenuBar(menubar);
+		
 		incluirFrame = new IncluirMercadoriaFrame(this);
 		editarFrame = new EditarMercadoriaFrame(this);
 		buscaFrame = new BuscaMercadoriaFrame(this);
+		sobreFrame = new SobreFrame();
 		
 		inicializaDB();
 	}
@@ -108,7 +123,6 @@ public class ListaMercadoriasFrame extends JFrame {
 	
 	public Runnable newAtualizaMercadoriasAction() {
 		return new Runnable() {
-			@Override
 			public void run() {
 				try {
 					MercadoriaDAO dao = new MercadoriaDAOJDBC();
@@ -126,7 +140,6 @@ public class ListaMercadoriasFrame extends JFrame {
 	}
 	
 	private class ExcluirMercadoriaListener implements ActionListener {
-		@Override
 		public void actionPerformed(ActionEvent e) {
 			Mercadoria m = tabela.getMercadoriaSelected();
 			if (m != null) {
@@ -145,7 +158,6 @@ public class ListaMercadoriasFrame extends JFrame {
 	}
 	
 	private class AtualizarListaListener implements ActionListener {
-		@Override
 		public void actionPerformed(ActionEvent e) {
 			SwingUtilities.invokeLater(newAtualizaMercadoriasAction());
 		}
@@ -170,9 +182,14 @@ public class ListaMercadoriasFrame extends JFrame {
 	}
 	
 	private class BuscarMercadoriaListener implements ActionListener {
-		@Override
 		public void actionPerformed(ActionEvent event) {
 			buscaFrame.setVisible(true);
+		}
+	}
+	
+	private class SobreMenuListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			sobreFrame.setVisible(true);
 		}
 	}
 

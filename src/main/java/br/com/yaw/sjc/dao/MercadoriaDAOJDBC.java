@@ -123,7 +123,6 @@ public class MercadoriaDAOJDBC implements MercadoriaDAO {
 		}
 	}
 	
-	@Override
 	public Mercadoria findById(Integer id) throws PersistenceException {
 		if (id == null || id.intValue() <= 0) {
 			throw new PersistenceException("Informe o id válido para fazer a busca!");

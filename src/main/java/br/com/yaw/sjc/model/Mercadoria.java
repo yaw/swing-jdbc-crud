@@ -80,7 +80,6 @@ public class Mercadoria {
 		 return numberFmt.parse(strPreco).doubleValue();
 	}
 	
-	@Override
 	public String toString() {
 		return "[ " + nome + " - " + descricao + " - " + quantidade + " - " + preco + " ]";
 	}

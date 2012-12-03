@@ -14,7 +14,6 @@ public class EditarMercadoriaFrame extends IncluirMercadoriaFrame {
 		setTitle("Editar");
 	}
 	
-	@Override
 	protected Mercadoria loadMercadoriaFromPanel() {
 		Mercadoria m = super.loadMercadoriaFromPanel();
 		m.setId(getIdMercadoria());
