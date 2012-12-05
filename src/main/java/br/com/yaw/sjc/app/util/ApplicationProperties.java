@@ -5,8 +5,6 @@ import java.util.Enumeration;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
-import br.com.yaw.sjc.ui.SobreFrame;
-
 /**
  * Recupera e disponibiliza informações do <code>MANIFEST.MF</code> para o aplicativo.
  * 
@@ -24,7 +22,7 @@ public class ApplicationProperties {
 	
 	static {
 		try {
-			Enumeration<URL> resources = SobreFrame.class.getClassLoader().getResources("META-INF/MANIFEST.MF");
+			Enumeration<URL> resources = ApplicationProperties.class.getClassLoader().getResources("META-INF/MANIFEST.MF");
 			while (resources.hasMoreElements()) {
 		    	Manifest manifest = new Manifest(resources.nextElement().openStream());
 		    	if (manifest.getMainAttributes().getValue("Built-By") != null 
