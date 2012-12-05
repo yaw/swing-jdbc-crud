@@ -1,10 +1,10 @@
 package br.com.yaw.sjc.ui;
 
-import static br.com.yaw.sjc.app.util.ApplicationProperties.getBuild;
-import static br.com.yaw.sjc.app.util.ApplicationProperties.getDesenvolvidoPor;
-import static br.com.yaw.sjc.app.util.ApplicationProperties.getSite;
-import static br.com.yaw.sjc.app.util.ApplicationProperties.getTitulo;
-import static br.com.yaw.sjc.app.util.ApplicationProperties.getVersao;
+import static br.com.yaw.sjc.util.ApplicationProperties.getBuild;
+import static br.com.yaw.sjc.util.ApplicationProperties.getDesenvolvidoPor;
+import static br.com.yaw.sjc.util.ApplicationProperties.getSite;
+import static br.com.yaw.sjc.util.ApplicationProperties.getTitulo;
+import static br.com.yaw.sjc.util.ApplicationProperties.getVersao;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;

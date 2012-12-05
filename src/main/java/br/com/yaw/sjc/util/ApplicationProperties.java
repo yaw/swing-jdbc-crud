@@ -1,4 +1,4 @@
-package br.com.yaw.sjc.app.util;
+package br.com.yaw.sjc.util;
 
 import java.net.URL;
 import java.util.Enumeration;
