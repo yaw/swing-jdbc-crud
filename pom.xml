@@ -18,6 +18,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.title>Demo Swing c/ JDBC</project.title>
 		<user.name>YaW Tecnologia</user.name>
+		<site>http://www.yaw.com.br</site>
 	</properties>
 
 	<dependencies>
@@ -71,6 +72,7 @@
 							<Built-By>${user.name}</Built-By>
 							<Implementation-Title>${project.title}</Implementation-Title>
 							<Implementation-Build>${buildNumber}</Implementation-Build>
+							<Implementation-Site>${site}</Implementation-Site>
 						</manifestEntries>
 					</archive>
 				</configuration>
