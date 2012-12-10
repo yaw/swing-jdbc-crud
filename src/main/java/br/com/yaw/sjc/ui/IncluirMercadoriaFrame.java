@@ -7,15 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.text.ParseException;
 
-import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-
+import javax.swing.*;
 import br.com.yaw.sjc.dao.MercadoriaDAO;
 import br.com.yaw.sjc.dao.MercadoriaDAOJDBC;
 import br.com.yaw.sjc.model.Mercadoria;
@@ -54,6 +46,23 @@ public class IncluirMercadoriaFrame extends JFrame {
 		panel.add(montaPanelEditarMercadoria(), BorderLayout.CENTER);
 		panel.add(montaPanelBotoesEditar(), BorderLayout.SOUTH);
 		add(panel);
+		
+		GroupLayout layout = new GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 	}
 	
 	private JPanel montaPanelBotoesEditar() {
@@ -74,9 +83,8 @@ public class IncluirMercadoriaFrame extends JFrame {
 
 	private JPanel montaPanelEditarMercadoria() {
 		JPanel painelEditarMercadoria = new JPanel();
-		GridLayout layout = new GridLayout(8, 1);
-		painelEditarMercadoria.setLayout(layout);
-
+		painelEditarMercadoria.setLayout(new GridLayout(8, 1));
+		
 		tfNome = new JTextField();
 		tfDescricao = new JTextField();
 		tfPreco = new JTextField();
@@ -94,7 +102,7 @@ public class IncluirMercadoriaFrame extends JFrame {
 		painelEditarMercadoria.add(tfQuantidade);
 		painelEditarMercadoria.add(new JLabel("Id:"));
 		painelEditarMercadoria.add(tfId);
-
+		
 		return painelEditarMercadoria;
 	}
 	

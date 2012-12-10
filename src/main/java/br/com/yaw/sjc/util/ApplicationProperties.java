@@ -66,4 +66,8 @@ public class ApplicationProperties {
 		return attributes.getValue(property);
 	}
 	
+	public static URL getURLLogo() { 
+        URL imageURL = ApplicationProperties.class.getClassLoader().getResource("logo_yaw.png");  
+        return imageURL;  
+    }
 }
