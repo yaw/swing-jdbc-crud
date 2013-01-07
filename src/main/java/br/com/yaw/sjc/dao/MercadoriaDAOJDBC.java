@@ -19,7 +19,7 @@ import br.com.yaw.sjc.model.Mercadoria;
  * 
  * <p>A integração com o banco de dados e o envio dos comandos SQL ocorre através da API <code>JDBC</code>.</p>
  * 
- * @see br.com.yaw.sjpac.dao.MercadoriaDAO
+ * @see br.com.yaw.sjc.dao.MercadoriaDAO
  * 
  * @author YaW Tecnologia
  */
