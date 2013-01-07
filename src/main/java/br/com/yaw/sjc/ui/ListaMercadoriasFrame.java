@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
+import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -16,6 +17,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
 import br.com.yaw.sjc.dao.MercadoriaDAO;
@@ -81,7 +83,7 @@ public class ListaMercadoriasFrame extends JFrame {
 		menubar = new JMenuBar();
 		JMenu mAjuda = new JMenu("Ajuda");
 		mAjuda.setMnemonic(KeyEvent.VK_J);
-        JMenuItem miSobre = new JMenuItem("Sobre");
+        JMenuItem miSobre = new JMenuItem("Sobre    - F1");
         miSobre.addActionListener(new SobreMenuListener());
         mAjuda.add(miSobre);
         menubar.add(mAjuda);
@@ -91,6 +93,9 @@ public class ListaMercadoriasFrame extends JFrame {
 		editarFrame = new EditarMercadoriaFrame(this);
 		buscaFrame = new BuscaMercadoriaFrame(this);
 		sobreFrame = new SobreFrame();
+		
+		mAjuda.getInputMap().put(KeyStroke.getKeyStroke("F1"),"pressed");
+		mAjuda.getActionMap().put("pressed", new SobreMenuListener());
 		
 		inicializaDB();
 	}
@@ -163,7 +168,7 @@ public class ListaMercadoriasFrame extends JFrame {
 		}
 	}
 	
-	private class SobreMenuListener implements ActionListener {
+	private class SobreMenuListener extends AbstractAction implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			sobreFrame.setVisible(true);
 		}
