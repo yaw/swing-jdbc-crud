@@ -6,13 +6,15 @@
 		<vendor>YaW Tecnologia</vendor>
 		<description>Demo Swing e JDBC</description>
 		<description kind="short">SJC</description>
+		<icon href="logo_yaw.png"/>
+		<icon kind="splash" href="logo_yaw.png"/>
 	</information>
 	
 	<security>
 	</security>
 	
 	<resources>
-		<j2se version="1.6.0+" initial-heap-size="32m" max-heap-size="128m"/>
+		<j2se version="1.6.0+" initial-heap-size="32m" max-heap-size="256m"/>
 		
 		<jar href="lib/hsqldb-2.2.8.jar" download="eager" />
 		<jar href="lib/log4j-1.2.16.jar" download="eager" />
