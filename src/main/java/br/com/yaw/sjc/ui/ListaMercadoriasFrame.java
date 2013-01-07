@@ -35,7 +35,6 @@ public class ListaMercadoriasFrame extends JFrame {
 	private MercadoriaTable tabela;
 	private JScrollPane scrollPane;
 	private JButton bNovaMercadoria;
-	private JButton bExcluirMercadoria;
 	private JButton bBuscarMercadoria;
 	private JButton bAtualizaLista;
 	private JMenuBar menubar;
@@ -53,6 +52,7 @@ public class ListaMercadoriasFrame extends JFrame {
 		
 		pack();
 		setLocationRelativeTo(null);
+		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
 	}
@@ -67,11 +67,6 @@ public class ListaMercadoriasFrame extends JFrame {
 		bNovaMercadoria.setText("Nova");
 		bNovaMercadoria.setMnemonic(KeyEvent.VK_N);
 		bNovaMercadoria.addActionListener(new IncluirMercadoriaListener());
-
-		bExcluirMercadoria = new JButton();
-		bExcluirMercadoria.setText("Excluir");
-		bExcluirMercadoria.setMnemonic(KeyEvent.VK_E);
-		bExcluirMercadoria.addActionListener(new ExcluirMercadoriaListener());
 
 		bBuscarMercadoria = new JButton();
 		bBuscarMercadoria.setText("Buscar");
@@ -104,7 +99,6 @@ public class ListaMercadoriasFrame extends JFrame {
 		add(scrollPane);
 		JPanel panel = new JPanel();
 		panel.add(bNovaMercadoria);
-		panel.add(bExcluirMercadoria);
 		panel.add(bBuscarMercadoria);
 		panel.add(bAtualizaLista);
 		add(panel, BorderLayout.SOUTH);
@@ -137,24 +131,6 @@ public class ListaMercadoriasFrame extends JFrame {
 	
 	public void refreshTable(List<Mercadoria> mercadorias) {
 		tabela.reload(mercadorias);
-	}
-	
-	private class ExcluirMercadoriaListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			Mercadoria m = tabela.getMercadoriaSelected();
-			if (m != null) {
-				try {
-					MercadoriaDAO dao = new MercadoriaDAOJDBC();
-					dao.remove(m);
-					
-					SwingUtilities.invokeLater(newAtualizaMercadoriasAction());
-					
-				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(ListaMercadoriasFrame.this,
-							ex.getMessage(), "Erro ao excluir Mercadoria", JOptionPane.ERROR_MESSAGE);
-				}
-			}
-		}
 	}
 	
 	private class AtualizarListaListener implements ActionListener {

@@ -33,18 +33,22 @@ public class MercadoriaTableModel extends AbstractTableModel {
 		fireTableDataChanged();
 	}
 
+	@Override
 	public Class<?> getColumnClass(int coluna) {
 		return colTipos[coluna];
 	}
 
+	@Override
 	public int getColumnCount() {
 		return 4;
 	}
 
+	@Override
 	public String getColumnName(int coluna) {
 		return colNomes[coluna];
 	}
 
+	@Override
 	public int getRowCount() {
 		if (mercadorias == null){
 			return 0;
@@ -52,6 +56,7 @@ public class MercadoriaTableModel extends AbstractTableModel {
 		return mercadorias.size();
 	}
 
+	@Override
 	public Object getValueAt(int linha, int coluna) {
 		Mercadoria m = mercadorias.get(linha);
 		switch (coluna) {
@@ -68,6 +73,7 @@ public class MercadoriaTableModel extends AbstractTableModel {
 		}
 	}
 	
+	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
 		return false;
 	}
@@ -75,5 +81,4 @@ public class MercadoriaTableModel extends AbstractTableModel {
 	public Mercadoria getMercadoriaAt(int index) {
 		return mercadorias.get(index);
 	}
-	
 }

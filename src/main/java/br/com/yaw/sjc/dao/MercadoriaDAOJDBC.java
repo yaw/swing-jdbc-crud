@@ -36,6 +36,7 @@ public class MercadoriaDAOJDBC implements MercadoriaDAO {
 	
 	private static Logger log = Logger.getLogger(MercadoriaDAOJDBC.class);
 	
+	@Override
 	public void init() throws PersistenceException {
 		Connection conn = null;
 		Statement stmt = null;
@@ -55,6 +56,7 @@ public class MercadoriaDAOJDBC implements MercadoriaDAO {
 		}
 	}
 	
+	@Override
 	public void save(Mercadoria mercadoria) throws PersistenceException {
 		if (mercadoria == null) {
 			throw new PersistenceException("Informe a Mercadoria para salvar!");
@@ -100,6 +102,7 @@ public class MercadoriaDAOJDBC implements MercadoriaDAO {
 		return stmt;
 	}
 
+	@Override
 	public void remove(Mercadoria m) throws PersistenceException {
 		if (m == null || m.getId() == null) {
 			throw new PersistenceException("Informe a mercadoria para exclusao!");
@@ -123,6 +126,7 @@ public class MercadoriaDAOJDBC implements MercadoriaDAO {
 		}
 	}
 	
+	@Override
 	public Mercadoria findById(Integer id) throws PersistenceException {
 		if (id == null || id.intValue() <= 0) {
 			throw new PersistenceException("Informe o id válido para fazer a busca!");
@@ -156,6 +160,7 @@ public class MercadoriaDAOJDBC implements MercadoriaDAO {
 		}
 	}
 	
+	@Override
 	public List<Mercadoria> getAll() throws PersistenceException {
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -176,6 +181,8 @@ public class MercadoriaDAOJDBC implements MercadoriaDAO {
 		}
 	}
 	
+	@Override
+	@SuppressWarnings("unchecked")
 	public List<Mercadoria> getMercadoriasByNome(String nome) throws PersistenceException {
 		if (nome == null || nome.isEmpty()) {
 			return Collections.EMPTY_LIST;

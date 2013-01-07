@@ -37,6 +37,7 @@ public class BuscaMercadoriaFrame extends JFrame {
 		setTitle("Buscar");
 		setSize(250, 250);
 		setLocationRelativeTo(null);
+		setResizable(false);
 		inicializaComponentes();
 	}
 	
@@ -97,8 +98,8 @@ public class BuscaMercadoriaFrame extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			String nome = tfNome.getText();
 			if (nome.isEmpty()) {
-				JOptionPane.showMessageDialog(BuscaMercadoriaFrame.this, 
-						"Informe o nome (filtro) para a pesquisa.", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+				resetForm();
+				setVisible(false);
 				return;
 			}
 			try {

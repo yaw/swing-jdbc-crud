@@ -11,7 +11,8 @@ public class EditarMercadoriaFrame extends IncluirMercadoriaFrame {
 
 	public EditarMercadoriaFrame(ListaMercadoriasFrame framePrincipal) {
 		super(framePrincipal);
-		setTitle("Editar");
+		setTitle("Editar Mercadoria");
+		bExcluir.setVisible(true);
 	}
 	
 	protected Mercadoria loadMercadoriaFromPanel() {

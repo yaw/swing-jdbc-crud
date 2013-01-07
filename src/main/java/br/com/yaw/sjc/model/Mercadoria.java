@@ -5,7 +5,9 @@ import java.text.ParseException;
 import java.util.Locale;
 
 /**
- * Classe de modelo que representa uma mercadoria. A mercadoria é um objeto persistido no banco de dados, por isso utilizamos a classificamos como <strong>Entidade</strong>.
+ * Classe de modelo que representa uma mercadoria.
+ * 
+ * <p>A <code>mercadoria</code> é um objeto persistido no banco de dados, por isso a classificamos como <strong>Entidade</strong>.</p>
  * 
  * <p>As funcionalidades desse sistema demonstração são concentradas no cadastro (CRUD) de mercadorias.</p>
  * 
